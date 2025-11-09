@@ -1,0 +1,77 @@
+
+/* Body e tipografia */
+body {
+    font-family: "Syne Mono", monospace;
+    font-weight: 200;
+    background-color: rgb(0, 0, 0);
+    padding: 3%;
+    color: white;
+}
+
+.back-text {display: block;
+  top: 30px;
+  color: rgb(255, 255, 255);
+  font-family: "Syne Mono", monospace;
+  font-weight: bold;
+  user-select: none;
+  z-index: 10;
+}
+
+.back-text p {width: auto; height: 50px; font-size: 15px;}
+
+.back-text a {
+  color: red;
+  font-size: 20px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.back-text a:hover {
+  font-size: 25px;
+}
+
+h1 {font-size: 5vw;}
+
+p {font-size: 2vw;}
+
+svg {width: 2vw; color: white;}
+
+.changelgs {
+  position: fixed;       /* fixa o ícone no ecrã, mesmo com scroll */
+  top: 20px;             /* mesma altura vertical do "CONTACTOS" */
+  right: 20px;          /* ajusta a distância — deixa espaço antes do texto */
+  width: 32px;           /* tamanho consistente */
+  height: 32px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+a {color: white; text-decoration: none ;}
+
+.flag-container {
+  position: fixed; /* flutua sobre o layout */
+  top: 20px;       /* distância do topo da página */
+  right: 20px;     /* distância da direita */
+  z-index: 5;
+  display: inline-block;
+}
+
+.flag-tooltip {
+  position: absolute; 
+  top: 40px; /* ajuste para ficar abaixo do SVG */
+  right: -37px;
+  transform: translateX(-50%);
+  background-color: #000000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.flag-container:hover .flag-tooltip {
+  opacity: 1;
+}
