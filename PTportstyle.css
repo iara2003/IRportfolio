@@ -16,8 +16,11 @@ html, body {
   position: fixed; /* trava completamente o body */
   top: 0;
   left: 0;
+       transition: 0.4s ease;
 }
 
+
+body:has(.back-text a:hover){filter: grayscale(1)}
 
 
 
@@ -242,9 +245,14 @@ html, body {
   color: white;          /* muda se quiser outra cor */
   z-index: 5;          /* acima de outros elementos */
   cursor: pointer;       /* opcional: se quiser que pareça clicável */
-  user-select: none;     /* impede seleção */
-background-color: black;
+  user-select: none;    
+  background-color: black; /* impede seleção */
+  transition: ease 0.5s;
+  transform-origin: center;    
 }
+
+.contact-text:hover {top: 27px;}
+
 
 /* ===== LINHA VERTICAL E TEXTO ===== */
 .vertical-line {
@@ -283,7 +291,7 @@ background-color: black;
 }
 
 .back-text {
-  width: 80%;
+  width: 85%;
   position: absolute;
   top: 30px;              /* distância do topo */
   left: 50%;
@@ -406,19 +414,6 @@ background-color: black;
 }
 
 
-/* Overlay com GIF/ seta */
-.hover-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  color: black;
-  transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0.77);
-  z-index: 3; /* assegura que fica acima de tudo */
-}
 
 .hover-overlay svg {width: 2vw; padding-top: 3vw;}
 
@@ -486,6 +481,12 @@ background-color: black;
 
 /* Overlay de "click here" */
 .hover-overlay {
+    box-sizing: border-box;
+  padding: 3%;
+  inset: 0;
+  color: black;
+  background: rgba(0, 0, 0, 0.77);
+  z-index: 3;
   position: absolute;
   top: 40%;       /* mesma posição da .screen */
   left: 50%;
@@ -496,7 +497,7 @@ background-color: black;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 2vw;       /* ajusta conforme quiser */
+  font-size: 1.5vw;       /* ajusta conforme quiser */
   font-weight: bold;
   text-align: center;
   opacity: 0;
@@ -615,16 +616,6 @@ background-color: black;
   color: white;
 }
 
-.floating-gallery {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 3vw;
-  padding: 3vw 1vw;
-  perspective: 800px;
-}
 
 /* Cada item (imagem + link) */
 .floating-item {
@@ -847,19 +838,6 @@ background-color: black;
 
 }
 
-/* A grelha continua fixa no fundo */
-
-/* A galeria flutua por cima e rola normalmente */
-.floating-gallery {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 3vw;
-  padding: 4vw 2vw;
-}
 
 
 #modal-viewer {
@@ -973,7 +951,7 @@ background-color: black;
   justify-content: center;
   align-items: center;
   gap: 1.2vw;              /* antes era 3vw → reduzido para menos espaço */
-  padding: 2vw 1vw;        /* menos espaço nas bordas */
+  padding: 2vw 5vw;        /* menos espaço nas bordas */
   width: 100%;
   box-sizing: border-box;
 }
@@ -1139,114 +1117,78 @@ filter: grayscale(100%);
 .dg-inside {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: center; /* centraliza verticalmente */
+  justify-content: center; 
+  align-items: center;      /* CENTRAR verticalmente */
   text-align: center;
   margin: auto;
-  padding: 2vw;
+  padding: 4vw;
+  gap: 4vw;
+  background-color: #000;
+}
+
+/* Galeria */
+.design-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2vw;
+  align-items: center;      /* Também ajuda no alinhamento vertical */
 }
 
-#window-designgrafico {  background-color: #000000;}
-
+/* Cada item */
 .design-item {
+  width: auto;
   position: relative;
-  display: inline-block;
-
+  overflow: hidden;
+  display: block;         /* <- importante */
+  line-height: 0;         /* <- remove espaço invisível */
 }
 
-/* Imagens centralizadas e sem bordas arredondadas */
-.dg-inside img {
+
+/* A imagem */
+.design-item img {
+  display: block;
   height: 30vw;
   width: auto;
-  margin: auto;
+  margin: 0;       /* <- evitar deslocamento */
+  padding: 0;
   border: none;
-  border-radius: 0; /* sem cantos arredondados */
-  transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
 
-
-
-/* quando as descrições estão ativas */
-.show-descriptions .overlay {
-  opacity: 1;
-}
-
-
-/* Botão fixo e centralizado no topo da janela */
-
-#toggle-descriptions svg {width: 90%; align-self: center; }
-
-/* wrapper que fica sticky e centraliza o botão */
-.toggle-wrap {
-  position: fixed;
-  top: 5;
-  z-index: 12;                /* acima das imagens */
-  display: flex;
-  justify-content: center;   /* centraliza horizontalmente */
-  margin: 3%;          /* espaço ao redor para não colar ao topo */
-  background: transparent;   /* mantém o fundo da janela visível */
-  width: 5%;
-  
-}
-
-/* botão: alinhamento perfeito e animação centrada */
-#toggle-descriptions {
-  background: none;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;        /* altura fixa para consistência */
-  transform-origin: center center;  /* garante escala a partir do centro */
-  transition: transform 180ms cubic-bezier(.2,.9,.3,1), background 180ms;
-  will-change: transform;    
-    transition: transform 0.3s ease;   /* otimização */
-}
-
-/* hover: apenas escala — sem translate */
-#toggle-descriptions:hover {
-  transform: scale(1.2); /* escala centralizada */
-}
-
-
-/* Mostrar descrições ao passar o rato no botão */
-#toggle-descriptions:hover ~ .dg-inside .overlay {
-  opacity: 1;
-}
-
-/* Mostrar descrições quando o botão é hover */
-.toggle-wrap:hover ~ .dg-inside .overlay,
-#toggle-descriptions:hover ~ .dg-inside .overlay {
-  opacity: 1;
-}
-
-
-/* Overlay invisível por padrão */
-.overlay {
+/* Overlay — cobre o item inteiro */
+.design-item .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.819);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  color: white;
+  font-size: 14px;
+  padding: 15px;
   text-align: center;
+
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: 0.35s ease;
+  pointer-events: none;
+  box-sizing: border-box;
+    white-space: normal;    /* allow text to wrap */
+  word-wrap: break-word;  /* break long words if needed */
+  line-height: 1.4;   
 }
 
-/* Mostrar descrições quando .window-content.dg tem a classe */
-.window-content.dg.show-descriptions .overlay {
+
+/* Hover */
+.design-item:hover .overlay {
   opacity: 1;
 }
+
 
 /* --- FOTOGRAFIA --- */
 
@@ -1397,11 +1339,10 @@ filter: grayscale(100%);
 }
 
 .painel-galeria p {
-  width: 70%;
-  margin: auto;
   font-size: 1vw;
 text-align: center;
-  padding: 2%;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 /* === Estrutura das janelas de fotografia === */
@@ -1453,9 +1394,6 @@ text-align: center;
   z-index: 5;
 }
 
-.datas {text-align: right; }
-
-
 .flag-container {
   position: fixed; /* flutua sobre o layout */
   top: 20px;       /* distância do topo da página */
@@ -1483,3 +1421,6 @@ text-align: center;
 .flag-container:hover .flag-tooltip {
   opacity: 1;
 }
+
+
+.datas {text-align: right; }
